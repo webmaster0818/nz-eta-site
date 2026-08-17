@@ -27,5 +27,5 @@ export const FACTS = {
     "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/",
 } as const;
 
-/** ⚠️ ドメイン未確定。決まり次第ここだけ差し替える（canonical/OGで使う）。 */
-export const SITE = "https://example.invalid";
+/** canonical・OG・sitemap で使う本番URL（2026-08-17 okina取得）。 */
+export const SITE = "https://nzeta-online.com";
