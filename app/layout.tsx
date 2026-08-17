@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   keywords:
     "NZeTA, New Zealand eTA, Electronic Travel Authority, IVL, International Visitor Levy, New Zealand travel authorisation",
   robots: { index: true, follow: true },
+  /** ⚠️ Search Consoleの所有権確認はMETA方式。
+   *  FILE方式は trailingSlash:true のせいで /googleXXXX.html が308になり使えなかった。 */
+  verification: { google: "u7cswoLnSj51ZO6QLLRBwN62QGsvxamKaV_XVGm99i0" },
   openGraph: {
     title: "New Zealand eTA Guide — what the NZeTA really costs",
     description:
