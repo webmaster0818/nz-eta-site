@@ -35,24 +35,24 @@ export const metadata: Metadata = {
 };
 
 const STATS = [
-  { v: F.totalApp, l: "Typical total cost", s: `${F.feeApp} request + ${F.ivl} IVL` },
-  { v: `${F.validYears} years`, l: "Validity", s: "Multiple entries" },
-  { v: `${F.stayDays} days`, l: "Max stay per visit", s: `${F.stayUkMonths} months on a UK passport` },
-  { v: F.decisionTypical, l: "Allow up to", s: "Often much faster" },
+  { v: F.totalApp, l: "What you pay", s: `${F.feeApp} request fee + ${F.ivl} IVL` },
+  { v: `${F.validYears} years`, l: "Valid for", s: "Multiple entries allowed" },
+  { v: "3 months", l: "Stay per visit", s: `${F.stayUkMonths} months on a UK passport` },
+  { v: F.decisionTypical, l: "Processing time", s: "Often approved in minutes" },
 ];
 
 const FEATURES = [
   {
     h: "It is not a visa",
-    p: "The NZeTA is a pre-travel authorisation for visa-waiver passports. If your country is not on the waiver list, you need a visitor visa instead.",
+    p: "It is a pre-travel authorisation for visa-waiver passports. If your country is not on the waiver list, you need a visitor visa instead.",
   },
   {
     h: "Checked before you board",
-    p: "Airlines and cruise lines verify it electronically against your passport. There is nothing to print and nothing to carry.",
+    p: "Airlines and cruise lines check it electronically against your passport, so there is nothing to print and nothing to carry.",
   },
   {
     h: "Two charges, one payment",
-    p: `The request fee (${F.feeApp} in the app, ${F.feeWeb} online) and the ${F.ivl} IVL are collected together — about ${F.totalApp} in total.`,
+    p: `The request fee (${F.feeApp} in the app, ${F.feeWeb} online) and the ${F.ivl} IVL are taken in one transaction — about ${F.totalApp} in total.`,
   },
 ];
 
@@ -63,7 +63,7 @@ const STEPS = [
   },
   {
     h: "Scan your passport and take a photo",
-    p: "The app reads the passport chip and asks for a photo of your face. Your details must match the passport exactly.",
+    p: "The app reads your passport chip, then asks you to take a photo of your face. Your details must match your passport exactly.",
   },
   {
     h: "Pay the request fee and the IVL together",
@@ -82,11 +82,11 @@ const FAQ = [
   },
   {
     q: "Is the app really cheaper than the website?",
-    a: `Yes. The request fee is ${F.feeApp} in the official app versus ${F.feeWeb} through the website — a NZ$6 difference for the same authorisation. If you can install the app, use it.`,
+    a: `Yes. The request fee is ${F.feeApp} in the official app versus ${F.feeWeb} through the website — NZ$6 cheaper for exactly the same authorisation. If you can install the app, use it.`,
   },
   {
     q: "How long does the NZeTA last?",
-    a: `${F.validYears} years from the date it is issued, or until your passport expires if that comes first. It allows multiple entries.`,
+    a: `${F.validYears} years from the date it is issued, or until your passport expires — whichever comes first. It allows multiple entries.`,
   },
   {
     q: "How long can I stay in New Zealand?",
@@ -149,8 +149,8 @@ export default function Home() {
             className="mt-5 text-base md:text-lg leading-relaxed"
             style={{ color: "rgba(255,255,255,.9)", maxWidth: "52ch" }}
           >
-            Most guides quote {F.feeApp}. That is only the request fee — the {F.ivl} visitor levy is
-            charged at the same time. Here is what you actually pay, and how to apply on the official
+            Most guides quote {F.feeApp}. That is only the request fee — the {F.ivl} visitor levy is taken
+            at the same time. Here is what you actually pay, and how to apply through the official
             channels.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -162,7 +162,7 @@ export default function Home() {
             </a>
           </div>
           <p className="mt-6 text-xs" style={{ color: "rgba(255,255,255,.75)" }}>
-            Independent guide · not affiliated with the New Zealand Government · updated {F.updated}
+            Independent guide · not affiliated with the New Zealand Government · updated {F.updatedLabel}
           </p>
         </div>
       </section>
@@ -216,7 +216,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
           <h2 className="heading-band text-2xl md:text-3xl reveal">What it actually costs</h2>
           <p className="mt-5 leading-relaxed reveal reveal-delay-1" style={{ maxWidth: "70ch" }}>
-            Two charges are collected in one transaction. This is the part most people get wrong.
+            Two separate charges are taken in a single transaction, which is where most people go wrong.
           </p>
           <div className="mt-7 card reveal reveal-delay-2" style={{ padding: "1.6rem 1.6rem" }}>
             <div className="overflow-x-auto">
@@ -251,7 +251,7 @@ export default function Home() {
           <p className="mt-6 leading-relaxed text-sm reveal reveal-delay-3" style={{ maxWidth: "70ch" }}>
             The IVL — the International Visitor Conservation and Tourism Levy — is a separate charge
             from the NZeTA itself. It rose from NZ$35 to {F.ivl} in October 2024 and is still{" "}
-            {F.ivl} as of {F.updated}. Sites that advertise only {F.feeApp} are quoting the request
+            {F.ivl} as of {F.updatedLabel}. Sites that advertise only {F.feeApp} are quoting the request
             fee alone.
           </p>
         </div>
@@ -288,9 +288,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
           <h2 className="heading-band text-2xl md:text-3xl reveal">At the border</h2>
           <p className="mt-5 leading-relaxed reveal reveal-delay-1" style={{ maxWidth: "70ch" }}>
-            There is nothing to print. Carry the same passport you applied with — the authorisation
-            is recorded against it. You will also complete a New Zealand Traveller Declaration
-            before arrival, which is separate from the NZeTA and free.
+            There is nothing to print. Just carry the same passport you applied with — your authorisation
+            is held against it electronically. You will also need to complete a New Zealand Traveller
+            Declaration before you arrive, which is separate from the NZeTA and free of charge.
           </p>
         </div>
       </section>
@@ -327,8 +327,8 @@ export default function Home() {
             className="mt-4 text-sm leading-relaxed reveal reveal-delay-1"
             style={{ color: "rgba(255,255,255,.85)" }}
           >
-            Applications are made on Immigration New Zealand&apos;s own app and website. We are an
-            independent guide and do not submit applications on your behalf.
+            Applications are made through Immigration New Zealand&apos;s own app and website. We are an
+            independent guide and cannot submit an application on your behalf.
           </p>
           <div className="mt-8 reveal reveal-delay-2">
             <a

@@ -19,7 +19,9 @@ export const FACTS = {
    *     英語サイトは英国からの読者が多いので、この例外を落とさない。 */
   stayUkMonths: 6,
   decisionTypical: "72 hours",
+  /** ISOで持つ。⚠️ 画面には英語圏で自然な "17 August 2026" 形式で出す（updatedLabel） */
   updated: "2026-08-17",
+  updatedLabel: "17 August 2026",
   /** 申請先。公式以外に窓口は無いので、CTAは全部ここを指す */
   officialUrl:
     "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/",
