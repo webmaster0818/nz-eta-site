@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/data/facts";
+import { PAGE_SLUGS } from "@/data/pages";
 
 /** ⚠️ output:"export" では必須。無いと「dynamic not configured」でビルドが落ちる。 */
 export const dynamic = "force-static";
@@ -10,12 +11,14 @@ export const dynamic = "force-static";
  * ⚠️ 下層ページを作ったらここに足す（作っていないURLを載せない）。
  */
 export default function sitemap(): MetadataRoute.Sitemap {
+  const d = new Date("2026-08-19");
   return [
-    {
-      url: `${SITE}/`,
-      lastModified: new Date("2026-08-17"),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
+    { url: `${SITE}/`, lastModified: d, changeFrequency: "weekly", priority: 1 },
+    ...PAGE_SLUGS.map((slug) => ({
+      url: `${SITE}/${slug}/`,
+      lastModified: d,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }
