@@ -80,6 +80,16 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                 {b.ul.map((x) => <li key={x}>{x}</li>)}
               </ul>
             );
+          if ("source" in b)
+            // 出典リンク。数値を書いたページには必ず一次情報へのリンクを添える（読者が原典を辿れる状態にする）
+            return (
+              <p key={i} className="mt-4 text-xs reveal" style={{ color: "var(--color-muted, #667)" }}>
+                Source:{" "}
+                <a href={b.source.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
+                  {b.source.label}
+                </a>
+              </p>
+            );
           return (
             <div key={i} className="card mt-6 reveal" style={{ background: "var(--color-bg-soft)" }}>
               <p className="text-sm leading-relaxed">{b.note}</p>

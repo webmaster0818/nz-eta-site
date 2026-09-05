@@ -13,7 +13,9 @@ export type Block =
   | { h2: string }
   | { p: string }
   | { ul: string[] }
-  | { note: string };
+  | { note: string }
+  /** 出典リンク。数値・罰則を書いたページには必ず添える（読者が一次情報を辿れるように） */
+  | { source: { label: string; url: string } };
 
 export type Page = {
   slug: string;
@@ -230,15 +232,23 @@ export const PAGES: Page[] = [
       {
         p: `Holders of a UK passport with the right of abode in the United Kingdom may stay up to ${F.stayUkMonths} months per visit. This is the single most-missed detail on English-language guides.`,
       },
+      { h2: "The limit most guides leave out" },
+      {
+        // ⚠️ 「3か月」だけを書くと「出入国を繰り返せば無限に居られる」と誤解させる。
+        //    実際の上限は12か月中6か月。ここを落とさない（2026-09-05 公式で確認）。
+        p: `Three months is the per-visit limit. Separately, you may only visit New Zealand for up to ${F.stayMaxInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period. Leaving the country and coming back does not create new time — it only splits the time you already have.`,
+      },
       { h2: "Conditions that apply to your stay" },
       {
         ul: [
           "You must hold an onward or return ticket",
-          "You must have funds to support yourself, or sponsorship",
+          `You must have funds to support yourself — ${F.fundsPerMonth} per month, or ${F.fundsPerMonthPrepaid} per month if your accommodation is already paid for`,
+          `Your passport must be valid for at least ${F.passportValidityMonths} months after you plan to leave`,
           "You may not work for a New Zealand employer",
-          "Study is limited to a short course",
+          `Study is limited to ${F.studyMonthsInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period`,
         ],
       },
+      { source: { label: "Immigration New Zealand — Visa Waiver Visitor Visa", url: "https://www.immigration.govt.nz/visas/visa-waiver-visitor-visa/" } },
       { h2: "The border officer has the final say" },
       {
         p: "An approved NZeTA permits you to travel. The immigration officer at the airport decides whether you may enter and for how long, and may ask about your plans, your accommodation and your funds.",
@@ -299,6 +309,269 @@ export const PAGES: Page[] = [
       { p: "No. It permits travel; entry is decided by the border officer on arrival." },
       { h2: "Can I work in New Zealand on an NZeTA?" },
       { p: "No. Business visitor activities such as meetings and conferences are allowed, but not employment with a New Zealand employer." },
+    ],
+  },
+  {
+    slug: "six-months-in-12-months",
+    nav: "6 months in any 12",
+    title: "The rule that really limits your stay: 6 months in any 12-month period",
+    description:
+      "Three months per visit is not the whole story. Visa-waiver travellers may spend at most six months in New Zealand in any twelve-month period, however many trips that takes.",
+    blocks: [
+      {
+        p: `Most guides stop at "three months per visit". That is correct, but it is not the limit that catches people out. Immigration New Zealand also caps the total: you may only visit New Zealand for up to ${F.stayMaxInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period.`,
+      },
+      { h2: "Why both numbers exist" },
+      {
+        p: `The per-visit limit controls how long one entry can last: ${F.stayMonths} months for most passports, ${F.stayUkMonths} months on a UK passport. The ${F.stayMaxInTwelveMonths}-months-in-${2 * F.stayMaxInTwelveMonths} rule controls how much of the year you may spend in the country in total. You have to satisfy both.`,
+      },
+      { h2: "What this means in practice" },
+      {
+        ul: [
+          `Two separate three-month visits in one year put you at the ${F.stayMaxInTwelveMonths}-month ceiling`,
+          "A UK passport holder reaches the ceiling in a single six-month visit",
+          "The period is rolling, not a calendar year — it is measured backwards from the day you want to arrive",
+        ],
+      },
+      { h2: "If you have already used your six months" },
+      {
+        p: "Immigration New Zealand is explicit about this: if you have already spent six months in New Zealand in a 12-month period, you must apply for a visitor visa before you travel. Arriving on an NZeTA instead is not an option, and the decision is made before you board.",
+      },
+      { source: { label: "Immigration New Zealand — Visa Waiver Visitor Visa", url: "https://www.immigration.govt.nz/visas/visa-waiver-visitor-visa/" } },
+      {
+        note: "An approved NZeTA does not override this. It authorises you to travel; it does not confirm that you are still within the six-month allowance.",
+      },
+    ],
+  },
+  {
+    slug: "leaving-and-returning",
+    nav: "Leaving and returning",
+    title: "Does leaving New Zealand and coming back reset your three months?",
+    description:
+      "A short trip to Australia and back does not give you a fresh three months. Here is what actually resets, what does not, and why repeated entries attract questions.",
+    blocks: [
+      {
+        p: "This is the most common misunderstanding about visa-waiver travel to New Zealand. The short answer is no: hopping over to Australia or the Pacific and returning does not hand you a clean three months.",
+      },
+      { h2: "What resets and what does not" },
+      {
+        ul: [
+          `The per-visit clock does restart — a new entry is a new visit of up to ${F.stayMonths} months`,
+          `The annual total does not — you are still capped at ${F.stayMaxInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period`,
+          `Your NZeTA is unaffected either way: it lasts ${F.validYears} years and covers multiple entries`,
+        ],
+      },
+      {
+        p: `So the trip out does not create new time. It only splits the time you already have into separate visits. If you have used four months of your ${F.stayMaxInTwelveMonths}, leaving and returning leaves you with two.`,
+      },
+      { h2: "The pattern matters as much as the arithmetic" },
+      {
+        p: "Immigration officers look at the shape of your travel, not just each entry in isolation. Someone who leaves for three days every three months and spends the rest of the year in New Zealand is living there, not visiting, whatever the stamps say. Expect to be asked about your ties to your home country, your work, and how you are funding a long stay.",
+      },
+      { h2: "What to carry if you are re-entering" },
+      {
+        ul: [
+          "Your onward or return ticket",
+          `Evidence of funds — ${F.fundsPerMonth} per month, or ${F.fundsPerMonthPrepaid} per month if your accommodation is already paid for`,
+          "Something that shows you are going home: a job, a lease, enrolment, family commitments",
+        ],
+      },
+      { source: { label: "Immigration New Zealand — Visa Waiver Visitor Visa", url: "https://www.immigration.govt.nz/visas/visa-waiver-visitor-visa/" } },
+      {
+        note: "If your plan genuinely needs more than six months in the year, apply for a visitor visa before you travel rather than relying on repeated entries.",
+      },
+    ],
+  },
+  {
+    slug: "extending-your-stay",
+    nav: "Extending your stay",
+    title: "Can you extend a visa-waiver stay in New Zealand?",
+    description:
+      "The NZeTA itself cannot be extended. What you can do is apply for a visitor visa from inside New Zealand — and the timing of that application matters.",
+    blocks: [
+      {
+        p: `The NZeTA is not a visa and has no extension mechanism. Your ${F.validYears}-year authorisation is about permission to board, not permission to stay longer. To remain beyond your visa-waiver entry you need a different immigration status: a visitor visa.`,
+      },
+      { h2: "Apply before your current stay expires" },
+      {
+        p: "An application made while you are still lawfully in New Zealand is treated very differently from one made after your permitted stay has ended. Once you overstay you are unlawfully in the country, which affects future applications to New Zealand and can affect other countries too. Do not let the date pass while you decide.",
+      },
+      { h2: "The six-month ceiling still applies" },
+      {
+        p: `A visitor visa is also subject to the overall limit on visitor time. Immigration New Zealand's guidance is that visitors may only be in New Zealand for up to ${F.stayMaxInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period, and a longer stay needs to be justified on its own terms.`,
+      },
+      { h2: "What a visitor visa asks for that an NZeTA does not" },
+      {
+        ul: [
+          "Evidence of funds for the whole extended period",
+          "A reason for the longer stay that is consistent with visiting",
+          "Evidence that you intend to leave — ties to your home country",
+          "In some cases, medical or character documentation",
+        ],
+      },
+      { h2: "What an extension will not give you" },
+      {
+        ul: [
+          "The right to work for a New Zealand employer",
+          `Unlimited study — study on a visitor status is limited to ${F.studyMonthsInTwelveMonths} months in any ${2 * F.stayMaxInTwelveMonths}-month period`,
+          "Residence, or a path to it",
+        ],
+      },
+      { source: { label: "Immigration New Zealand — Visa Waiver Visitor Visa", url: "https://www.immigration.govt.nz/visas/visa-waiver-visitor-visa/" } },
+      {
+        note: "Applications are made only through Immigration New Zealand. No third party can extend a stay on your behalf, and no paid service speeds the decision up.",
+      },
+    ],
+  },
+  {
+    slug: "passport-validity",
+    nav: "Passport validity",
+    title: "How much passport validity do you need for New Zealand?",
+    description:
+      `Your passport must be valid for at least ${F.passportValidityMonths} months after you plan to leave New Zealand — not after you arrive. Renewing mid-trip also invalidates your NZeTA.`,
+    blocks: [
+      {
+        p: `Immigration New Zealand requires your passport to be valid for at least ${F.passportValidityMonths} months after the date you plan to leave New Zealand. Read that carefully: the count runs from your departure, not your arrival. A passport that expires four months after you land can still fail if you are staying three months.`,
+      },
+      { h2: "Work it out from the end of the trip" },
+      {
+        ul: [
+          "Take your planned departure date from New Zealand",
+          `Add ${F.passportValidityMonths} months`,
+          "Your passport must still be valid on that date",
+        ],
+      },
+      { h2: "A new passport means a new NZeTA" },
+      {
+        p: `The NZeTA is linked electronically to the passport used in the application. If you renew your passport, the authorisation does not transfer — even though it would otherwise still be within its ${F.validYears} years. You must request a new one before you travel.`,
+      },
+      { h2: "Travel on the passport you applied with" },
+      {
+        p: "If you hold more than one nationality, the passport you present at check-in must be the one your NZeTA is attached to. Dual nationals are refused boarding for this reason more often than for any problem with the authorisation itself.",
+      },
+      { source: { label: "Immigration New Zealand — Visa Waiver Visitor Visa", url: "https://www.immigration.govt.nz/visas/visa-waiver-visitor-visa/" } },
+      {
+        note: "Damaged passports are a separate risk. A water-damaged or torn biodata page can be refused even when the expiry date is fine, and the chip may fail to read in the NZeTA app.",
+      },
+    ],
+  },
+  {
+    slug: "traveller-declaration",
+    nav: "Traveller Declaration",
+    title: "The New Zealand Traveller Declaration: what it is and when to file it",
+    description:
+      `Everyone arriving in New Zealand must complete a Traveller Declaration, including New Zealand passport holders. It is free and opens ${F.nztdHoursBefore} hours before you travel.`,
+    blocks: [
+      {
+        p: `New Zealand collects its arrival information through the New Zealand Traveller Declaration (NZTD). Everyone travelling into New Zealand must complete one — including New Zealand passport holders. It is free.`,
+      },
+      { h2: "When you can submit it" },
+      {
+        ul: [
+          `Flying: from ${F.nztdHoursBefore} hours before you start your trip to New Zealand`,
+          `By sea: from ${F.nztdHoursBefore} hours before the vessel leaves its last foreign port`,
+        ],
+      },
+      {
+        p: "Doing it before you fly is easier than filling in a paper declaration on board, and it means you are not trying to recall an address or a flight number while queuing.",
+      },
+      { h2: "What it asks for" },
+      {
+        ul: [
+          "Passport details and your contact address in New Zealand",
+          "Travel details and where you have been in the last 30 days",
+          "Your visa or NZeTA status",
+          "Your customs and biosecurity declarations",
+        ],
+      },
+      { h2: "It is not the same thing as an NZeTA" },
+      {
+        p: `The NZeTA is requested once and lasts ${F.validYears} years. The Traveller Declaration is completed for every arrival. Having one does not replace the other, and the declaration is free while the NZeTA is not.`,
+      },
+      { source: { label: "New Zealand Traveller Declaration", url: "https://www.travellerdeclaration.govt.nz/" } },
+      {
+        note: `A false or incorrect declaration carries an instant fine of ${F.biosecurityInstantFine}. If you are unsure whether something needs declaring, declare it — there is no penalty for declaring an item that turns out to be fine.`,
+      },
+    ],
+  },
+  {
+    slug: "biosecurity",
+    nav: "Biosecurity",
+    title: "New Zealand biosecurity: what you must declare, and the fine if you do not",
+    description:
+      `Failing to declare risk goods is an instant ${F.biosecurityInstantFine} fine even when it is an honest mistake. Deliberate smuggling carries up to ${F.biosecurityMaxFine} and ${F.biosecurityMaxPrisonYears} years in prison.`,
+    blocks: [
+      {
+        p: "New Zealand's economy rests on agriculture and its ecosystems evolved in isolation, so its biosecurity controls are among the strictest anywhere. Travellers who arrive expecting European or North American norms are the ones who get fined.",
+      },
+      { h2: "This is a strict liability offence" },
+      {
+        p: `Under the Biosecurity Act 1993, failing to declare risk goods you have with you is an offence whether or not you meant to. Forgetting an apple in your bag is treated the same as hiding one. The penalty is an instant infringement fee of ${F.biosecurityInstantFine}.`,
+      },
+      {
+        p: `Deliberately concealing items is a different matter: a maximum fine of ${F.biosecurityMaxFine} and up to ${F.biosecurityMaxPrisonYears} years' imprisonment.`,
+      },
+      { h2: "What people are actually caught with" },
+      {
+        ul: [
+          "Food of any kind — fruit, meat, dairy, honey, snacks from the plane",
+          "Plant material — seeds, wooden souvenirs, woven items, flowers",
+          "Hiking boots and tent pegs with soil still on them",
+          "Camping and fishing gear, and anything used around animals",
+        ],
+      },
+      { h2: "The rule that keeps you safe" },
+      {
+        p: "Declaring costs nothing. If you declare an item and it turns out to be permitted, you keep it and walk on. If you fail to declare it and it is found, the fine applies even if the item itself would have been allowed through. When in doubt, tick yes.",
+      },
+      { h2: "Before you pack" },
+      {
+        ul: [
+          "Clean the soil off boots, tent pegs and sports equipment at home",
+          "Eat or bin food before you land rather than carrying it through",
+          "Check wooden and woven souvenirs — they are risk goods, not curios",
+        ],
+      },
+      { source: { label: "Ministry for Primary Industries — What happens if you fail to declare", url: "https://www.mpi.govt.nz/bring-send-to-nz/bringing-and-posting-items-to-nz/what-happens-if-you-fail-to-declare" } },
+      {
+        note: "Bins are provided before the biosecurity queue. Using one is free; being found with the item afterwards is not.",
+      },
+    ],
+  },
+  {
+    slug: "customs-allowances",
+    nav: "Customs allowances",
+    title: "New Zealand customs allowances: goods, alcohol, tobacco and cash",
+    description:
+      `Goods over ${F.customsGoodsAllowance}, more than ${F.customsCigarettes} cigarettes, and cash of ${F.customsCashThreshold} or more all have to be declared on arrival.`,
+    blocks: [
+      {
+        p: "Customs and biosecurity are separate checks with separate rules. Biosecurity is about what could harm New Zealand's environment; customs is about duty, GST and prohibited goods. You can clear one and be stopped by the other.",
+      },
+      { h2: "Goods you bought overseas" },
+      {
+        p: `You must declare goods totalling more than ${F.customsGoodsAllowance} that you obtained overseas or bought duty-free, gifts included. Travelling companions cannot pool their allowances into one larger figure.`,
+      },
+      { h2: "Alcohol and tobacco" },
+      {
+        ul: [
+          `You must be ${F.customsAlcoholAgeMin} or over to claim the alcohol and tobacco concessions`,
+          `Alcohol: more than ${F.customsSpiritsBottles} bottles of spirits (each up to 1.125 litres) and ${F.customsWineBeerLitres} litres of wine or beer must be declared`,
+          `Tobacco: more than ${F.customsCigarettes} cigarettes or ${F.customsCigarettes} grams of tobacco products must be declared`,
+        ],
+      },
+      { h2: "Cash" },
+      {
+        p: `Carrying ${F.customsCashThreshold} or more — or the equivalent in another currency — has to be declared. This includes travellers cheques, bank drafts and money orders, not only banknotes. Declaring it is not a problem; failing to is.`,
+      },
+      { h2: "What it costs to get this wrong" },
+      {
+        p: `A false or incorrect declaration carries an instant fine of ${F.biosecurityInstantFine}, the same figure that applies to undeclared biosecurity risk goods.`,
+      },
+      { source: { label: "New Zealand Customs Service — On your arrival", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/travel-by-air/on-your-arrival" } },
+      {
+        note: "Duty-free purchased on your way into New Zealand still counts towards the goods allowance. Buying it airside does not exempt it.",
+      },
     ],
   },
   {
