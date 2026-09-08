@@ -30,7 +30,14 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   /** ⚠️ Search Consoleの所有権確認はMETA方式。
    *  FILE方式は trailingSlash:true のせいで /googleXXXX.html が308になり使えなかった。 */
-  verification: { google: "u7cswoLnSj51ZO6QLLRBwN62QGsvxamKaV_XVGm99i0" },
+  // Search Consoleの所有権確認。**複数アカウントぶんを並べられる**（配列で渡すとmetaが複数出る）。
+  // 1つ目: 既存の管理アカウント / 2つ目: Saburo MediXAI（medix.saburo.ai0818・2026-09-08 okina依頼）
+  verification: {
+    google: [
+      "u7cswoLnSj51ZO6QLLRBwN62QGsvxamKaV_XVGm99i0",
+      "MMFN2IqxGI9ajU6voDAoW1hZvDQRKAVfHxYRhf5LZzM",
+    ],
+  },
   openGraph: {
     title: "New Zealand eTA Guide — what the NZeTA really costs",
     description:
