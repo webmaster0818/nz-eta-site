@@ -575,6 +575,220 @@ export const PAGES: Page[] = [
     ],
   },
   {
+    slug: "medicines",
+    nav: "Bringing medicines",
+    title: "Bringing prescription medicines into New Zealand",
+    description:
+      `You may bring up to ${F.medsMonthsPrescription} months' supply of prescription medicine, but only ${F.medsMonthsControlled} month if it is a controlled drug. Both need documentation, and both must be declared.`,
+    blocks: [
+      {
+        p: "New Zealand treats medicine you bring for your own use as an import, and the rules differ depending on what the medicine is. Getting this wrong is one of the few ways an otherwise straightforward arrival turns into a long conversation at the border.",
+      },
+      { h2: "The two limits" },
+      {
+        ul: [
+          `Prescription medicines: up to ${F.medsMonthsPrescription} months' supply`,
+          `Oral contraceptives: up to ${F.medsMonthsContraceptive} months' supply`,
+          `Medicines that are also controlled drugs: only ${F.medsMonthsControlled} month's supply`,
+        ],
+      },
+      {
+        p: "The controlled-drug category is where people get caught. Strong painkillers, some ADHD medicines and some sleep medicines fall into it even when they are entirely ordinary prescriptions at home.",
+      },
+      { h2: "What you must carry" },
+      {
+        ul: [
+          "A copy of the prescription, or a letter from your doctor saying you are being treated with the medicine",
+          "The medicine in its original labelled containers — not a pill organiser",
+          "For controlled drugs, the letter should state the name and strength of the medicine",
+        ],
+      },
+      { h2: "Declare it" },
+      {
+        p: "Medicines are declared on your New Zealand Traveller Declaration. Controlled drugs must be declared. Declaring is not a problem; arriving with an undeclared controlled drug is.",
+      },
+      { source: { label: "Ministry of Health / Medsafe — Bringing medicines into New Zealand", url: "https://www.health.govt.nz/regulation-legislation/medicines-control/bringing-medicines-into-new-zealand" } },
+      { source: { label: "New Zealand Customs Service — Medicines", url: "https://www.customs.govt.nz/travel-to-and-from-new-zealand/medicines" } },
+      {
+        note: "If your trip is longer than the supply limit allows, arrange treatment in New Zealand rather than carrying extra. Bringing more than the permitted quantity is an import, not a personal supply.",
+      },
+    ],
+  },
+  {
+    slug: "transit",
+    nav: "Transit through Auckland",
+    title: "Do you need an NZeTA just to change planes in Auckland?",
+    description:
+      "Most passengers transiting through Auckland need an NZeTA even though they never leave the airport. This is the single most missed requirement for New Zealand.",
+    blocks: [
+      {
+        p: "Yes, in most cases. Transit is the requirement travellers overlook, because in many countries changing planes needs nothing at all. New Zealand is not one of them: most passengers transiting through Auckland International Airport need an NZeTA.",
+      },
+      { h2: "Why this catches people out" },
+      {
+        ul: [
+          "You are not entering the country, so it does not feel like it should need permission",
+          "The requirement is checked at your departure airport, not on arrival",
+          "Airlines refuse boarding without it — the trip ends before it starts",
+        ],
+      },
+      { h2: "What to do" },
+      {
+        p: `Request the NZeTA before you fly, the same as any other traveller: ${F.feeApp} in the official app or ${F.feeWeb} on the Immigration New Zealand website, and allow for the ${F.decisionTypical} that a decision usually takes.`,
+      },
+      { h2: "The levy question" },
+      {
+        p: `The International Visitor Conservation and Tourism Levy (${F.ivl}) is charged with the NZeTA. Whether it applies to your particular transit is worth checking on the official page before you assume either way.`,
+      },
+      { source: { label: "Immigration New Zealand — NZeTA", url: "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/" } },
+      {
+        note: "If your itinerary changes and you now have a longer stopover that takes you out of the airport, you are no longer transiting — you are visiting, and the visitor conditions apply.",
+      },
+    ],
+  },
+  {
+    slug: "cruise-passengers",
+    nav: "Cruise passengers",
+    title: "Cruise passengers need an NZeTA — regardless of nationality",
+    description:
+      "The visa-waiver list does not apply to cruise arrivals. Every cruise passenger needs an NZeTA, including nationalities that would otherwise need a visa.",
+    blocks: [
+      {
+        p: "This is the rule that works the opposite way from what people expect. For air travel, the NZeTA is only for visa-waiver passports. For cruise passengers, it applies to everyone — whatever passport you hold.",
+      },
+      { h2: "Why it is different" },
+      {
+        p: "A cruise ship calls at several ports over a few days. Rather than assessing each passenger at each port, New Zealand requires the authorisation in advance from every passenger, and the ship's arrival is processed as a whole.",
+      },
+      { h2: "What this means in practice" },
+      {
+        ul: [
+          "Every passenger needs their own NZeTA, including infants",
+          "Nationality does not exempt you — the visa-waiver list is not the test here",
+          "Request it before you board, not at the first New Zealand port",
+        ],
+      },
+      { h2: "Do not rely on the cruise line" },
+      {
+        p: "Some lines remind passengers and some do not, and the responsibility is yours either way. Being refused boarding at the start of a cruise is a worse outcome than being turned back at an airport, because the ship leaves without you.",
+      },
+      { source: { label: "Immigration New Zealand — NZeTA", url: "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/" } },
+      {
+        note: `The authorisation lasts ${F.validYears} years, so one request covers repeat cruises within that period — as long as you still hold the same passport.`,
+      },
+    ],
+  },
+  {
+    slug: "if-declined",
+    nav: "If you are declined",
+    title: "What happens if your NZeTA is declined",
+    description:
+      "A declined NZeTA is not the end of the trip, but reapplying with the same details will not change the outcome. Here is what actually comes next.",
+    blocks: [
+      {
+        p: "Most NZeTA requests are approved automatically. When one is not, it is either referred for a manual check — which simply takes longer — or declined. The two are different, and the response to each is different.",
+      },
+      { h2: "First, check which one it is" },
+      {
+        ul: [
+          `Still processing: decisions usually take ${F.decisionTypical}, and some take longer. Wait rather than reapplying`,
+          "Declined: you have been assessed and refused. Requesting another NZeTA with the same information will produce the same answer",
+        ],
+      },
+      { h2: "Why NZeTAs are declined" },
+      {
+        ul: [
+          "Your passport is not eligible for the visa-waiver arrangement",
+          "Details entered do not match the passport",
+          "Character or immigration history questions that need a full assessment",
+          "You have already used your allowance of visitor time",
+        ],
+      },
+      { h2: "What to do instead" },
+      {
+        p: "If the reason is a data-entry error, correcting it and requesting again is legitimate. If the reason is that you are not eligible for the NZeTA, the route is a visitor visa, which is a fuller application assessed by a person. Do not keep submitting NZeTA requests in the hope of a different result — the pattern itself becomes part of your record.",
+      },
+      { h2: "Do not use a third party to 'fix' it" },
+      {
+        p: `No agent has influence over the decision, and none can appeal it for you. Applications are made only through Immigration New Zealand, at ${F.feeApp} in the app or ${F.feeWeb} on the website.`,
+      },
+      { source: { label: "Immigration New Zealand — NZeTA", url: "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/" } },
+      {
+        note: "An approved NZeTA is still not a guarantee of entry. The border officer decides on arrival, and being refused entry is a separate outcome from being declined an NZeTA.",
+      },
+    ],
+  },
+  {
+    slug: "dual-nationals",
+    nav: "Dual nationals",
+    title: "Which passport should a dual national use for the NZeTA?",
+    description:
+      "The NZeTA is linked to one passport, and you must travel on that passport. Holding a second nationality is not a problem — presenting the wrong document at check-in is.",
+    blocks: [
+      {
+        p: "The rule is short: the NZeTA is attached electronically to the passport used in the request, and you must travel on that passport. Everything else follows from that.",
+      },
+      { h2: "Choosing which passport" },
+      {
+        ul: [
+          "It must be a passport from a visa-waiver country or territory — otherwise the NZeTA is not available on that document",
+          "If only one of your passports is eligible, that is the one to use",
+          "If both are eligible, use the one you will actually be carrying and checking in with",
+        ],
+      },
+      { h2: "Where it goes wrong" },
+      {
+        p: "Dual nationals are refused boarding for this more often than for any problem with the authorisation itself. The airline checks the passport in your hand against the record. If the NZeTA is attached to your other passport, the system finds nothing, and nothing is what the check-in agent acts on.",
+      },
+      { h2: "If you renew one of them" },
+      {
+        p: `A new passport means a new NZeTA, even though the authorisation would otherwise last ${F.validYears} years. This applies to whichever passport the NZeTA is attached to.`,
+      },
+      { h2: "New Zealand citizens" },
+      {
+        p: "If one of your nationalities is New Zealand, you travel on your New Zealand passport and do not need an NZeTA at all. Requesting one on your other passport does not change that.",
+      },
+      { source: { label: "Immigration New Zealand — NZeTA", url: "https://www.immigration.govt.nz/visas/new-zealand-electronic-travel-authority-nzeta/" } },
+    ],
+  },
+  {
+    slug: "children-and-infants",
+    nav: "Children and infants",
+    title: "Do children and babies need their own NZeTA?",
+    description:
+      "Yes. Every traveller needs an NZeTA in their own name, including infants who are travelling on a parent's lap and do not have their own seat.",
+    blocks: [
+      {
+        p: "Yes — every traveller needs one, including infants. There is no family application and no way to add a child to a parent's authorisation. Each person has their own passport, so each person has their own NZeTA.",
+      },
+      { h2: "This includes" },
+      {
+        ul: [
+          "Babies travelling on a parent's lap without their own seat",
+          "Children on a parent's itinerary but with their own passport",
+          "Cruise passengers of any age",
+        ],
+      },
+      { h2: "Applying for a child" },
+      {
+        ul: [
+          "Use the child's own passport details, not a parent's",
+          "The photo requirements apply to children too — this is where infant applications are most often rejected",
+          `Each application costs ${F.feeApp} in the app or ${F.feeWeb} on the website, plus the ${F.ivl} levy where it applies`,
+        ],
+      },
+      { h2: "Budget for the whole family" },
+      {
+        p: `A family of four is four separate requests and four levies. Using the app for each saves the difference between ${F.feeApp} and ${F.feeWeb} per person, which adds up.`,
+      },
+      { h2: "Children's passports expire sooner" },
+      {
+        p: `Children's passports are issued for shorter periods than adults'. An NZeTA lasts ${F.validYears} years, but a child's passport may expire before that — and when it does, the NZeTA stops working. Check the expiry date before assuming last year's authorisation still covers this year's trip.`,
+      },
+      { source: { label: "Immigration New Zealand — Visa Waiver Visitor Visa", url: "https://www.immigration.govt.nz/visas/visa-waiver-visitor-visa/" } },
+    ],
+  },
+  {
     slug: "about",
     nav: "About this guide",
     title: "About this guide",

@@ -52,6 +52,12 @@ export const FACTS = {
   /** New Zealand Traveller Declaration（NZTD）: 全員必須・無料・出発24時間前から */
   nztdHoursBefore: 24,
   nztdUrl: "https://www.travellerdeclaration.govt.nz/",
+
+  /* ── 医薬品の持ち込み（2026-09-08/09 Medsafe・保健省・税関で確認） ──
+     ⚠️ 「一般の処方薬」と「規制薬物にあたる薬」で上限が違う。混ぜて書かない。 */
+  medsMonthsPrescription: 3,
+  medsMonthsContraceptive: 6,
+  medsMonthsControlled: 1,
   /** ISOで持つ。⚠️ 画面には英語圏で自然な "17 August 2026" 形式で出す（updatedLabel） */
   updated: "2026-08-17",
   updatedLabel: "17 August 2026",
